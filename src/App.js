@@ -17,10 +17,10 @@ function App() {
             settaskItems(JSON.parse(data));
           }else{
             settaskItems([
-              {name:"Task One Example", done: false},
-              {name:"Task Two Example", done: false},
-              {name:"Task Three Example", done: true},
-              {name:"Task Four Example", done: false},
+              {name:"Create initial interface", done: false},
+              {name:"Functionality to add tasks", done: false},
+              {name:"Things to do", done: true},
+              {name:"upload example to repository", done: false},
             ])
             setShowCompleted(false);
           }
