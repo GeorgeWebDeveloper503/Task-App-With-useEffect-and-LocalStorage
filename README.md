@@ -17,3 +17,4 @@ You will also see any lint errors in the console.
 ## Learn More
 Example practice using reactJS
 
+![Image text](https://github.com/GeorgeWebDeveloper503/Task-App-and-LocalStorage/blob/main/public/taskApp.PNG)
