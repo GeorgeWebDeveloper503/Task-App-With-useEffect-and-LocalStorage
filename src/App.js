@@ -68,7 +68,7 @@ function App() {
         
         <div className='bg-secondary-text-white text-center p-2'>
           <VisibilityControl
-            description="Completed Task"
+            description="Completeds Tasks"
             isChecked={showCompleted}
             callback={checked => setShowCompleted(checked)}
           />
