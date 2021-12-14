@@ -15,15 +15,16 @@ function TaskCreator(props) {
   }
   
   return (
-    <div className='container mt-3'>
+    <div className='container'>
         <input 
             type="text"
-            className='form-control m-2'
+            className='form-control'
             value={newTaskNmae}
             onChange={updatedNewTaskName}
+            placeholder='addd task'
         />
             <div class="d-grid gap-2">
-            <button class="btn btn-primary m-5" type="button" onClick={createNewTask}>Add</button>
+            <button class="btn btn-primary m-2" type="button" onClick={createNewTask}>Add</button>
             </div>
     </div>
     

@@ -3,7 +3,7 @@ import React from "react";
 function TaskRow(props) {
   return (
     props.TaskRow
-    .filter(task => task.done === false)
+    .filter(task => task.done === props.doneValue)
     .map(task =>(
         <tr key={task.name}>
           <td>{task.name}</td>

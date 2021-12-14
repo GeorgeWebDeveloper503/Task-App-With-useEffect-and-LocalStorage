@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TaskRow from '../src/components/TaskRow';
 import TaskBanner from '../src/components/TaksBanner';
 import TaskCreator from '../src/components/TaskCreator';
@@ -7,14 +7,29 @@ import VisibilityControl from '../src/components/VisibilityControl';
 function App() {
   
   const [userName, setUserName] = useState('George');
-  const [taskItems, settaskItems] = useState([
-      {name:"Task One", done: false},
-      {name:"Task Two", done: false},
-      {name:"Task Three", done: true},
-      {name:"Task Four", done: false},
-    ]);
+  const [taskItems, settaskItems] = useState([{}]);
 
-    const [showCompleted, setShowCompleted] = useState(true);
+    let [showCompleted, setShowCompleted] = useState();
+
+    useEffect(()=>{
+        let data = localStorage.getItem('tasks');
+          if(data !=null){
+            settaskItems(JSON.parse(data));
+          }else{
+            settaskItems([
+              {name:"Task One Example", done: false},
+              {name:"Task Two Example", done: false},
+              {name:"Task Three Example", done: true},
+              {name:"Task Four Example", done: false},
+            ])
+            setShowCompleted(false);
+          }
+    },[])
+
+    useEffect(()=>{
+        localStorage.setItem('tasks',JSON.stringify(taskItems));
+    },[taskItems])
+
 
     const createNewTask = (taskName) => {
       if(!taskItems.find(t => t.name === taskName)){
@@ -25,6 +40,11 @@ function App() {
     const toggleTask = task =>{
       settaskItems(taskItems.map(t => (t.name === task.name ? {...t, done: !t.done} : t)));
     }
+
+
+    const TaskTableRows = (doneValue) =>{
+      return <TaskRow TaskRow={taskItems} toggleTask={toggleTask} doneValue={doneValue} ></TaskRow>;
+    };
 
 
 
@@ -42,7 +62,7 @@ function App() {
             </tr>
           </thead>
           <tbody>
-            <TaskRow TaskRow={taskItems} toggleTask={toggleTask} ></TaskRow>
+            {TaskTableRows(false)};
           </tbody>
         </table>
         
@@ -65,19 +85,7 @@ function App() {
             </thead>
             <tbody>
               {
-                taskItems
-                .filter(task => task.done === true)
-                .map(task =>(
-                    <tr key={task.name}>
-                      <td>{task.name}</td>
-                      <td>
-                          <input 
-                            type="checkbox" 
-                            checked={task.done}
-                            onChange={() => toggleTask(task)}  />
-                      </td>
-                    </tr>
-                  ))
+                TaskTableRows(true)
               }
             </tbody>
           </table>
